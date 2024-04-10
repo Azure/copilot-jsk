@@ -32,7 +32,7 @@ param location string = resourceGroup().location
 param tags object = {}
 
 @description('Optional. Compute instance name.')
-param computeInstanceName string = ''
+param computeInstanceName string = 'air6DemoCompute'
 
 // param adminUserName string = ''
 // param disableLocalAuth bool = false

@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.26.54.24096",
-      "templateHash": "6278805271867268650"
+      "templateHash": "13841690159026625743"
     },
     "name": "Azure OpenAI Studio Deployment",
     "description": "Azure OpenAI Studio Deployment"
@@ -73,7 +73,7 @@
     },
     "computeInstanceName": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "air6DemoCompute",
       "metadata": {
         "description": "Optional. Compute instance name."
       }
@@ -417,7 +417,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.26.54.24096",
-              "templateHash": "18061604976017444532"
+              "templateHash": "12747337252339562959"
             }
           },
           "parameters": {
@@ -479,7 +479,7 @@
             "computeInstanceName": {
               "type": "string",
               "metadata": {
-                "description": "Specifies the name of the Compute Instance to create under Azure Machine Learning workspace."
+                "description": "Required. Specifies the name of the Compute Instance to create under Azure Machine Learning workspace."
               }
             },
             "vmSize": {

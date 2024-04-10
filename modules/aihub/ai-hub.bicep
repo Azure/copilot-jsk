@@ -38,7 +38,7 @@ param storageAccountId string
 // @description('Specifies the name of the Azure Machine Learning service workspace.')
 // param workspaceName string
 
-@description('Specifies the name of the Compute Instance to create under Azure Machine Learning workspace.')
+@description('Required. Specifies the name of the Compute Instance to create under Azure Machine Learning workspace.')
 param computeInstanceName string
 
 // @description('Disables local auth when not using ssh')
