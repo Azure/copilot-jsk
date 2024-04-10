@@ -5,24 +5,24 @@ metadata description = 'Azure OpenAI Studio Deployment'
 
 @minLength(2)
 @maxLength(12)
-@description('Name for the AI resource and used to derive name of dependent resources.')
+@description('Optional. Name for the AI resource and used to derive name of dependent resources.')
 param aiHubName string = 'air6-demo'
 
 @minLength(2)
 @maxLength(12)
-@description('Name for the AI resource and used to derive name of dependent resources.')
+@description('Optional. Name for the AI resource and used to derive name of dependent resources.')
 param aiProjectName string = 'aitest-pjct'
 
-@description('Friendly name for your Azure AI resource')
+@description('Optional. Friendly name for your Azure AI resource')
 param aiHubFriendlyName string = 'Demo AI resource'
 
-@description('Description of your Azure AI resource dispayed in AI studio')
+@description('Optional. Description of your Azure AI resource dispayed in AI studio')
 param aiHubDescription string = 'This is an example AI resource for use in Azure AI Studio.'
 
-@description('Description of your Azure AI resource dispayed in AI studio')
+@description('Optional. Description of your Azure AI resource dispayed in AI studio')
 param aiProjectDescription string = 'This is an example AI project for.'
 
-@description('Friendly name for your Azure AI resource')
+@description('Optional. Friendly name for your Azure AI resource')
 param aiProjectFriendlyName string = 'DemoProject AI resource'
 
 @description('Optional. Location for all resources.')
@@ -31,13 +31,14 @@ param location string = resourceGroup().location
 @description('Optional. Set of tags to apply to all resources.')
 param tags object = {}
 
-
-param adminUserName string = ''
+@description('Optional. Compute instance name.')
 param computeInstanceName string = ''
-param disableLocalAuth bool = false
-param idleTimeBeforeShutdown string = '60'
-param rootAccess bool = false
-param workspaceName string = ''
+
+// param adminUserName string = ''
+// param disableLocalAuth bool = false
+// param idleTimeBeforeShutdown string = '60'
+// param rootAccess bool = false
+// param workspaceName string = ''
 
 // Variables
 var name = toLower('${aiHubName}')
@@ -78,20 +79,20 @@ module aiHub 'modules/aihub/ai-hub.bicep' = {
     tags: tags
 
     // dependent resources
-    aiServicesId: aiDependencies.outputs.aiservicesID
-    aiServicesTarget: aiDependencies.outputs.aiservicesTarget
-    applicationInsightsId: aiDependencies.outputs.applicationInsightsId
-    containerRegistryId: aiDependencies.outputs.containerRegistryId
+    // aiServicesId: aiDependencies.outputs.aiservicesID
+    // aiServicesTarget: aiDependencies.outputs.aiservicesTarget
+    // applicationInsightsId: aiDependencies.outputs.applicationInsightsId
+    // containerRegistryId: aiDependencies.outputs.containerRegistryId
     keyVaultId: aiDependencies.outputs.keyvaultId
     storageAccountId: aiDependencies.outputs.storageId
 
     // compute resources
-    adminUserName: adminUserName
+    // adminUserName: adminUserName
     computeInstanceName: computeInstanceName
-    disableLocalAuth: disableLocalAuth
-    idleTimeBeforeShutdown: idleTimeBeforeShutdown
-    rootAccess: rootAccess
-    workspaceName: workspaceName
+    // disableLocalAuth: disableLocalAuth
+    // idleTimeBeforeShutdown: idleTimeBeforeShutdown
+    // rootAccess: rootAccess
+    // workspaceName: workspaceName
     // subnetResourceID: aiDependencies.outputs.subnetResourceId
   }
 }

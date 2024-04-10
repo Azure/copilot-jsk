@@ -11,7 +11,7 @@ urlFragment:
 
 # Azure Copilot Jump Start Kit (Copilot-JSK)
 
-This repository provides an infrastructure deployment of a sandbox environment of the Azure Copilot Jumpstart Kit
+This repository provides an infrastructure deployment of a sandbox environment of the Azure Copilot Jump Start Kit
 
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/copilot-jsk/main/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fcopilot-jsk%2Fmain%2Fazuredeploy.json)
 

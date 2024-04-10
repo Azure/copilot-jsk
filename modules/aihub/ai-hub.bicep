@@ -17,11 +17,11 @@ param aiHubFriendlyName string = aiHubName
 @description('AI hub description')
 param aiHubDescription string
 
-@description('Resource ID of the application insights resource for storing diagnostics logs')
-param applicationInsightsId string
+// @description('Resource ID of the application insights resource for storing diagnostics logs')
+// param applicationInsightsId string
 
-@description('Resource ID of the container registry resource for storing docker images')
-param containerRegistryId string
+// @description('Resource ID of the container registry resource for storing docker images')
+// param containerRegistryId string
 
 @description('Resource ID of the key vault resource for storing connection strings')
 param keyVaultId string
@@ -29,33 +29,33 @@ param keyVaultId string
 @description('Resource ID of the storage account resource for storing experimentation outputs')
 param storageAccountId string
 
-@description('Resource ID of the AI Services resource')
-param aiServicesId string
+// @description('Resource ID of the AI Services resource')
+// param aiServicesId string
 
-@description('Resource ID of the AI Services endpoint')
-param aiServicesTarget string
+// @description('Resource ID of the AI Services endpoint')
+// param aiServicesTarget string
 
-@description('Specifies the name of the Azure Machine Learning service workspace.')
-param workspaceName string
+// @description('Specifies the name of the Azure Machine Learning service workspace.')
+// param workspaceName string
 
 @description('Specifies the name of the Compute Instance to create under Azure Machine Learning workspace.')
 param computeInstanceName string
 
-@description('Disables local auth when not using ssh')
-param disableLocalAuth bool
+// @description('Disables local auth when not using ssh')
+// param disableLocalAuth bool
 
-@description('Name of the administrator user account which can be used to SSH to nodes.')
-param adminUserName string
+// @description('Name of the administrator user account which can be used to SSH to nodes.')
+// param adminUserName string
 
-@description('Specifies the SSH Public Key to use for SSH access to the Compute Instance.')
-param adminUserSshPublicKey string = ''
+// @description('Specifies the SSH Public Key to use for SSH access to the Compute Instance.')
+// param adminUserSshPublicKey string = ''
 
-@description('Specifies whether SSH access should be enabled for compute instance')
-@allowed([
-  'Disabled'
-  'Enabled'
-])
-param sshAccess string = 'Disabled'
+// @description('Specifies whether SSH access should be enabled for compute instance')
+// @allowed([
+//   'Disabled'
+//   'Enabled'
+// ])
+// param sshAccess string = 'Disabled'
 
 @description('Specifies the VM size of the Compute Instance to create under Azure Machine Learning workspace.')
 @allowed([
@@ -503,14 +503,14 @@ param sshAccess string = 'Disabled'
 ])
 param vmSize string = 'Standard_DS11_v2'
 
-@description('Enable root access for assigned to user on compute instance')
-param rootAccess bool
+// @description('Enable root access for assigned to user on compute instance')
+// param rootAccess bool
 
-@description('Enable idle shutdown')
-param idleTimeBeforeShutdown string
+// @description('Enable idle shutdown')
+// param idleTimeBeforeShutdown string
 
-@description('Machine learning workspace private link endpoint name')
-param machineLearningPleName string = 'mlpe'
+// @description('Machine learning workspace private link endpoint name')
+// param machineLearningPleName string = 'mlpe'
 
 // param subnetResourceID string
 
@@ -550,8 +550,8 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2023-08-01-preview'
     // dependent resources
     keyVault: keyVaultId
     storageAccount: storageAccountId
-    applicationInsights: applicationInsightsId
-    containerRegistry: containerRegistryId
+    // applicationInsights: applicationInsightsId
+    // containerRegistry: containerRegistryId
   }
   kind: 'hub'
 
@@ -570,7 +570,7 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2023-08-01-preview'
   // }
 
   resource ai_computeInstance 'computes@2023-10-01' = {
-    name: '${aiHubName}-comp'
+    name: computeInstanceName
     location: location
     tags: tags
     identity: {
