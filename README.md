@@ -1,14 +1,3 @@
----
-page_type: sample
-languages:
-  - bicep
-name: Azure Copilot-JSK
-description: Deployment of Azure Copilot-JSK Sandbox
-products:
-  - azure
-urlFragment:
----
-
 # Azure Copilot Jump Start Kit (Copilot-JSK)
 
 This repository provides an infrastructure deployment of a sandbox environment of the Azure Copilot Jump Start Kit
@@ -17,12 +6,19 @@ This repository provides an infrastructure deployment of a sandbox environment o
 
 ## Content
 
-| File/folder       | Description                                |
-| ----------------- | ------------------------------------------ |
-| `modules`         | Bicep Module Directory                     |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `README.md`       | This README file.                          |
-| `LICENSE.md`      | The license for the sample.                |
+| File/folder           | Description                                           |
+| ----------------------|-------------------------------------------------------|
+| `modules`             | Bicep Module Directory                                |
+| `deployments`         | Future directory to house multiple deployments.       |
+| `images`              | Supporting Markdown images.                           |
+| `prompt-flow`         | OpenAi Prompt-Flow definitions.                       |
+| `azuredeploy.json`    | Copilot Deployment to Azure.                          |
+| `CODE_OF_CONDUCT.md`  | The license for the sample.                           |
+| `LICENSE.md`          | The license for the sample.                           |
+| `main.bicep`          | Bicep file that defines the infrastructure deployment.|
+| `README.md`           | This README file.                                     |
+| `SECURITY.md`         | Microsoft's Commitment to security.                   |
+| `SUPPORT.md`          | Definition of support for this project.               |
 
 ### Prerequisites
 
@@ -31,8 +27,6 @@ This repository provides an infrastructure deployment of a sandbox environment o
 - An Azure Subscription: [Free Account](https://azure.microsoft.com/en-gb/free/search/)
 - Visual Studio Code: [Download](https://code.visualstudio.com/Download)
   - Bicep Extension: [Download](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep)
-
-### Quickstart
 
 ### Part 0 - Get the repository
 
