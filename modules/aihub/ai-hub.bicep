@@ -29,15 +29,6 @@ param keyVaultId string
 @description('Resource ID of the storage account resource for storing experimentation outputs')
 param storageAccountId string
 
-// @description('Resource ID of the AI Services resource')
-// param aiServicesId string
-
-// @description('Resource ID of the AI Services endpoint')
-// param aiServicesTarget string
-
-// @description('Specifies the name of the Azure Machine Learning service workspace.')
-// param workspaceName string
-
 @description('Required. Specifies the name of the Compute Instance to create under Azure Machine Learning workspace.')
 param computeInstanceName string
 
@@ -503,38 +494,6 @@ param computeInstanceName string
 ])
 param vmSize string = 'Standard_DS11_v2'
 
-// @description('Enable root access for assigned to user on compute instance')
-// param rootAccess bool
-
-// @description('Enable idle shutdown')
-// param idleTimeBeforeShutdown string
-
-// @description('Machine learning workspace private link endpoint name')
-// param machineLearningPleName string = 'mlpe'
-
-// param subnetResourceID string
-
-// resource machineLearningPrivateEndpoint 'Microsoft.Network/privateEndpoints@2022-01-01' = {
-//   name: machineLearningPleName
-//   location: location
-//   properties: {
-//     privateLinkServiceConnections: [
-//       {
-//         name: machineLearningPleName
-//         properties: {
-//           groupIds: [
-//             'amlworkspace'
-//           ]
-//           privateLinkServiceId: aiHub.id
-//         }
-//       }
-//     ]
-//     subnet: {
-//       id: subnetResourceID
-//     }
-//   }
-// }
-
 resource aiHub 'Microsoft.MachineLearningServices/workspaces@2023-08-01-preview' = {
   name: aiHubName
   location: location
@@ -579,36 +538,23 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2023-08-01-preview'
     properties: {
       computeType: 'ComputeInstance'
       computeLocation: location
-      description: 'Machine Learning compute instance 001'
+      description: 'Machine Learning compute instance "${computeInstanceName}"'
       // disableLocalAuth: true
       properties: {
-        applicationSharingPolicy: 'Personal'
+        applicationSharingPolicy: 'Shared'
         computeInstanceAuthorizationType: 'personal'
         sshSettings: {
           sshPublicAccess: 'Enabled'
         }
         vmSize: vmSize
         enableNodePublicIp: true
-        // subnet: {
-        //   id: subnetResourceID
-        // }
       }
     }
   }
-
-  // resource aiHubPE 'privateEndpointConnections@2023-10-01' = {
-  //   name: 'string'
-  //   location: location
-  //   properties: {
-  //     privateEndpoint: {}
-  //     privateLinkServiceConnectionState: {
-  //       actionsRequired: 'string'
-  //       description: 'string'
-  //       status: 'string'
-  //     }
-  //   }
-  // }
 }
 
 output aiHubID string = aiHub.id
+output computeInstanceID string = aiHub::ai_computeInstance.id
+
+
 

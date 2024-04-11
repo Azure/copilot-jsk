@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.26.54.24096",
-      "templateHash": "13841690159026625743"
+      "templateHash": "15020605846812416919"
     },
     "name": "Azure OpenAI Studio Deployment",
     "description": "Azure OpenAI Studio Deployment"
@@ -17,7 +17,7 @@
       "minLength": 2,
       "maxLength": 12,
       "metadata": {
-        "description": "Optional. Name for the AI resource and used to derive name of dependent resources."
+        "description": "Optional. Prefix name for the AI resource and used to derive name of dependent resources."
       }
     },
     "aiProjectName": {
@@ -76,6 +76,13 @@
       "defaultValue": "air6DemoCompute",
       "metadata": {
         "description": "Optional. Compute instance name."
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_DS11_v2",
+      "metadata": {
+        "description": "Optional. Compute instance Virtual Machine Size."
       }
     }
   },
@@ -408,6 +415,9 @@
           },
           "computeInstanceName": {
             "value": "[parameters('computeInstanceName')]"
+          },
+          "vmSize": {
+            "value": "[parameters('vmSize')]"
           }
         },
         "template": {
@@ -417,7 +427,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.26.54.24096",
-              "templateHash": "12747337252339562959"
+              "templateHash": "5429882022657190028"
             }
           },
           "parameters": {
@@ -946,9 +956,9 @@
               "properties": {
                 "computeType": "ComputeInstance",
                 "computeLocation": "[parameters('location')]",
-                "description": "Machine Learning compute instance 001",
+                "description": "[format('Machine Learning compute instance \"{0}\"', parameters('computeInstanceName'))]",
                 "properties": {
-                  "applicationSharingPolicy": "Personal",
+                  "applicationSharingPolicy": "Shared",
                   "computeInstanceAuthorizationType": "personal",
                   "sshSettings": {
                     "sshPublicAccess": "Enabled"
@@ -985,6 +995,10 @@
             "aiHubID": {
               "type": "string",
               "value": "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('aiHubName'))]"
+            },
+            "computeInstanceID": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.MachineLearningServices/workspaces/computes', parameters('aiHubName'), parameters('computeInstanceName'))]"
             }
           }
         }

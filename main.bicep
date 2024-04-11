@@ -2,10 +2,9 @@
 metadata name = 'Azure OpenAI Studio Deployment'
 metadata description = 'Azure OpenAI Studio Deployment'
 
-
 @minLength(2)
 @maxLength(12)
-@description('Optional. Name for the AI resource and used to derive name of dependent resources.')
+@description('Optional. Prefix name for the AI resource and used to derive name of dependent resources.')
 param aiHubName string = 'air6-demo'
 
 @minLength(2)
@@ -34,25 +33,14 @@ param tags object = {}
 @description('Optional. Compute instance name.')
 param computeInstanceName string = 'air6DemoCompute'
 
-// param adminUserName string = ''
-// param disableLocalAuth bool = false
-// param idleTimeBeforeShutdown string = '60'
-// param rootAccess bool = false
-// param workspaceName string = ''
+@description('Optional. Compute instance Virtual Machine Size.')
+param vmSize string = 'Standard_DS11_v2'
 
 // Variables
 var name = toLower('${aiHubName}')
 
 // Create a short, unique suffix, that will be unique to each resource group
 var uniqueSuffix = substring(uniqueString(resourceGroup().id), 0, 4)
-
-// module aiNetwork 'modules/dependencies/virtual-network/virtual-network.bicep' = {
-//   name: 'network-${name}-${uniqueSuffix}-deployment'
-//   params: {
-//     location: location
-//     virtualNetworkName: 'vnet-${name}-${uniqueSuffix}'
-//   }
-// }
 
 // Dependent resources for the Azure Machine Learning workspace
 module aiDependencies 'modules/dependencies/dependent-resources.bicep' = {
@@ -79,21 +67,14 @@ module aiHub 'modules/aihub/ai-hub.bicep' = {
     tags: tags
 
     // dependent resources
-    // aiServicesId: aiDependencies.outputs.aiservicesID
-    // aiServicesTarget: aiDependencies.outputs.aiservicesTarget
     applicationInsightsId: aiDependencies.outputs.applicationInsightsId
     containerRegistryId: aiDependencies.outputs.containerRegistryId
     keyVaultId: aiDependencies.outputs.keyvaultId
     storageAccountId: aiDependencies.outputs.storageId
 
     // compute resources
-    // adminUserName: adminUserName
     computeInstanceName: computeInstanceName
-    // disableLocalAuth: disableLocalAuth
-    // idleTimeBeforeShutdown: idleTimeBeforeShutdown
-    // rootAccess: rootAccess
-    // workspaceName: workspaceName
-    // subnetResourceID: aiDependencies.outputs.subnetResourceId
+    vmSize: vmSize
   }
 }
 

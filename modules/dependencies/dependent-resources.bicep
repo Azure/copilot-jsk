@@ -18,18 +18,7 @@ param containerRegistryName string
 @description('The name of the Key Vault')
 param keyvaultName string
 
-
 var containerRegistryNameCleaned = replace(containerRegistryName, '-', '')
-
-// module virtualNetwork 'virtual-network/virtual-network.bicep' = {
-//   name: 'mlWorspaceVnet'
-//   params: {
-//     virtualNetworkName: 'mlWorspaceVnet'
-//     location: location
-//     storageAccountName: storageNameCleaned
-//     storage: storage.id
-//   }
-// }
 
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: applicationInsightsName
@@ -197,4 +186,3 @@ output storageId string = storage.id
 output keyvaultId string = keyVault.id
 output containerRegistryId string = containerRegistry.id
 output applicationInsightsId string = applicationInsights.id
-// output subnetResourceId string = virtualNetwork.outputs.subnetResourceId

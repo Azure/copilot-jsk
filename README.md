@@ -34,9 +34,6 @@ This repository provides an infrastructure deployment of a sandbox environment o
 
 ### Quickstart
 
-The instructions for these samples are in the form of Labs. Follow along with them to get up and running.
-
-
 ### Part 0 - Get the repository
 
 In this part, we are going to get a local copy of the lab files for use in the rest of the lab.
@@ -58,6 +55,7 @@ This architecture deploys the following:
 Containing:
 
 - Azure AI Hub
+- Azure AI Compute Resource
 - Azure AI Project(s)
 
 ### dependencies/dependent-resource.bicep
@@ -99,17 +97,6 @@ az deployment sub create --location 'westus' --name 'ai-demo' --template-file '<
 ```
 
 ---
-# Project
-
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
-
-As the maintainer of this project, please make a few updates:
-
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
 
 ## Contributing
 
