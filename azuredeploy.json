@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.26.54.24096",
-      "templateHash": "15020605846812416919"
+      "templateHash": "9203273521951901419"
     },
     "name": "Azure OpenAI Studio Deployment",
     "description": "Azure OpenAI Studio Deployment"
@@ -71,9 +71,9 @@
         "description": "Optional. Set of tags to apply to all resources."
       }
     },
-    "computeInstanceName": {
+    "computeInstanceNamePrefix": {
       "type": "string",
-      "defaultValue": "air6DemoCompute",
+      "defaultValue": "ai",
       "metadata": {
         "description": "Optional. Compute instance name."
       }
@@ -88,7 +88,8 @@
   },
   "variables": {
     "name": "[toLower(format('{0}', parameters('aiHubName')))]",
-    "uniqueSuffix": "[substring(uniqueString(resourceGroup().id), 0, 4)]"
+    "uniqueSuffix": "[substring(uniqueString(resourceGroup().id), 0, 6)]",
+    "computeInstanceName": "[format('{0}{1}', parameters('computeInstanceNamePrefix'), variables('uniqueSuffix'))]"
   },
   "resources": [
     {
@@ -414,7 +415,7 @@
             "value": "[reference(resourceId('Microsoft.Resources/deployments', format('dependencies-{0}-{1}-deployment', variables('name'), variables('uniqueSuffix'))), '2022-09-01').outputs.storageId.value]"
           },
           "computeInstanceName": {
-            "value": "[parameters('computeInstanceName')]"
+            "value": "[variables('computeInstanceName')]"
           },
           "vmSize": {
             "value": "[parameters('vmSize')]"
@@ -427,7 +428,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.26.54.24096",
-              "templateHash": "5429882022657190028"
+              "templateHash": "9711321235573188502"
             }
           },
           "parameters": {
@@ -996,6 +997,10 @@
               "type": "string",
               "value": "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('aiHubName'))]"
             },
+            "aiHubName": {
+              "type": "string",
+              "value": "[parameters('aiHubName')]"
+            },
             "computeInstanceID": {
               "type": "string",
               "value": "[resourceId('Microsoft.MachineLearningServices/workspaces/computes', parameters('aiHubName'), parameters('computeInstanceName'))]"
@@ -1043,7 +1048,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.26.54.24096",
-              "templateHash": "1461486837368608056"
+              "templateHash": "15365304007261369663"
             }
           },
           "parameters": {
@@ -1106,6 +1111,10 @@
             "aiProjectID": {
               "type": "string",
               "value": "[resourceId('Microsoft.MachineLearningServices/workspaces', parameters('aiProjectName'))]"
+            },
+            "aiProjectName": {
+              "type": "string",
+              "value": "[parameters('aiProjectName')]"
             }
           }
         }

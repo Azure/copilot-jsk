@@ -554,6 +554,7 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2023-08-01-preview'
 }
 
 output aiHubID string = aiHub.id
+output aiHubName string = aiHub.name
 output computeInstanceID string = aiHub::ai_computeInstance.id
 
 

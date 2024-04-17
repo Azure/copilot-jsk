@@ -31,7 +31,7 @@ param location string = resourceGroup().location
 param tags object = {}
 
 @description('Optional. Compute instance name.')
-param computeInstanceName string = 'air6DemoCompute'
+param computeInstanceNamePrefix string = 'ai'
 
 @description('Optional. Compute instance Virtual Machine Size.')
 param vmSize string = 'Standard_DS11_v2'
@@ -40,7 +40,9 @@ param vmSize string = 'Standard_DS11_v2'
 var name = toLower('${aiHubName}')
 
 // Create a short, unique suffix, that will be unique to each resource group
-var uniqueSuffix = substring(uniqueString(resourceGroup().id), 0, 4)
+var uniqueSuffix = substring(uniqueString(resourceGroup().id), 0, 6)
+
+var computeInstanceName = '${computeInstanceNamePrefix}${uniqueSuffix}'
 
 // Dependent resources for the Azure Machine Learning workspace
 module aiDependencies 'modules/dependencies/dependent-resources.bicep' = {
